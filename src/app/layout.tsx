@@ -38,6 +38,10 @@ export const metadata: Metadata = {
     "Kolez Buk Club is a curated literary community connecting independent authors with an engaged reading society — structured discovery, honest discussion, and stories that outlive launch week.",
   keywords: [
     "Kolez Buk Club",
+    "kolezbukclub",
+    "Kolez",
+    "Kolez Mordecai",
+    "Kolez Buk Club official website",
     "author community",
     "reader community",
     "literary community",
@@ -73,6 +77,9 @@ export const metadata: Metadata = {
     description:
       "Where Authors, Readers, and Great Stories Come Together. Join a literary community built around discovery, conversation, and connection.",
   },
+  alternates: {
+    canonical: "/",
+  },
   robots: { index: true, follow: true },
   verification: {
     google: "uKnmiszdnc-Et5vsv-ZDubBy0le3MOamF2KIsO1z7zk",
@@ -87,15 +94,32 @@ export const viewport: Viewport = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Kolez Buk Club",
-  url: "https://kolezbukclub.vercel.app",
-  logo: "https://kolezbukclub.vercel.app/kolez-logo.svg",
-  description:
-    "Kolez Buk Club brings independent authors and devoted readers together through merit-based book discovery, honest discussion, and a community that gives stories a lasting life.",
-  slogan: "Where Authors, Readers, and Great Stories Come Together.",
-  email: siteConfig.email,
-  sameAs: siteConfig.socials.map((s) => s.href),
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://kolezbukclub.vercel.app/#organization",
+      name: "Kolez Buk Club",
+      alternateName: "Kolez",
+      url: "https://kolezbukclub.vercel.app",
+      logo: "https://kolezbukclub.vercel.app/kolez-logo.svg",
+      description:
+        "Kolez Buk Club brings independent authors and devoted readers together through merit-based book discovery, honest discussion, and a community that gives stories a lasting life.",
+      slogan: "Where Authors, Readers, and Great Stories Come Together.",
+      email: siteConfig.email,
+      sameAs: siteConfig.socials.map((s) => s.href),
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://kolezbukclub.vercel.app/#website",
+      url: "https://kolezbukclub.vercel.app",
+      name: "Kolez Buk Club",
+      alternateName: "kolezbukclub",
+      description:
+        "A curated literary community connecting independent authors and devoted readers through structured discovery, honest conversation, and stories that outlive launch week.",
+      publisher: { "@id": "https://kolezbukclub.vercel.app/#organization" },
+      inLanguage: "en",
+    },
+  ],
 };
 
 export default function RootLayout({
