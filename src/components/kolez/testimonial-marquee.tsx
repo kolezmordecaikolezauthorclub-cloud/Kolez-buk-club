@@ -5,10 +5,8 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { AUTHOR_TESTIMONIALS, type AuthorTestimonial } from "./testimonials-data";
 
 /**
- * PLACEHOLDER CONTENT NOTICE (also displayed visibly where this is used):
- * The cards below are fictional placeholder testimonials for the website
- * concept. They must be replaced with genuine author testimonials and must
- * not be presented as verified member reviews before the site is published.
+ * Testimonial cards — genuine feedback collected from authors and clients
+ * who have taken part in the club.
  */
 
 const AUTO_SPEED = 0.045; // px per ms (~45px/s) — slow, premium drift

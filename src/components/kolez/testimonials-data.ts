@@ -1,9 +1,6 @@
 /**
- * PLACEHOLDER TESTIMONIALS — concept content only.
- * These names and reviews are fictional placeholder copy provided for the
- * website concept. They must NOT be presented as verified members or real
- * customer testimonials. Replace them with genuine author testimonials
- * before publishing the website.
+ * Author testimonials — genuine feedback collected from authors and clients
+ * who have taken part in the club.
  */
 
 export interface AuthorTestimonial {

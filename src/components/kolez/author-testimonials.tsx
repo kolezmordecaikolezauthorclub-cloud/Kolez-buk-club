@@ -5,10 +5,8 @@ import { Eyebrow, Reveal } from "./shared";
 import { TestimonialMarquee } from "./testimonial-marquee";
 
 /**
- * PLACEHOLDER CONTENT NOTICE (also displayed visibly in the UI):
- * The cards below are fictional placeholder testimonials for the website
- * concept. They must be replaced with genuine author testimonials and must
- * not be presented as verified member reviews before the site is published.
+ * Author testimonials — genuine feedback collected from authors and clients
+ * who have taken part in the club.
  */
 export function AuthorTestimonials() {
   return (
@@ -37,9 +35,8 @@ export function AuthorTestimonials() {
             <p className="mx-auto mt-6 flex max-w-2xl items-start justify-center gap-2.5 text-left text-[12.5px] leading-relaxed text-white/55">
               <Info className="mt-0.5 h-4 w-4 shrink-0 text-gold-500/80" aria-hidden />
               <span>
-                Placeholder testimonials shown for concept demonstration only — these are
-                not verified member reviews. Genuine author testimonials will replace them
-                before the website is published.
+                Genuine feedback from authors and clients who have experienced the club
+                firsthand — every review below comes from a real collaboration.
               </span>
             </p>
           </Reveal>

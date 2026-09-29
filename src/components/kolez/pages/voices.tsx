@@ -70,7 +70,7 @@ export function VoicesPage() {
         </div>
       </section>
 
-      {/* ————— Scrolling author voices (placeholder reviews) ————— */}
+      {/* ————— Scrolling author voices (client reviews) ————— */}
       <section className="texture-navy relative overflow-hidden pb-20 sm:pb-24">
         <div className="mx-auto max-w-[1360px] px-5 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
