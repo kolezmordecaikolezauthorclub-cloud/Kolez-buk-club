@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Kolez Buk Club">
+  <defs>
+    <linearGradient id="kolezNavy" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102D52"/>
+      <stop offset="1" stop-color="#071B35"/>
+    </linearGradient>
+    <linearGradient id="kolezGold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E7C766"/>
+      <stop offset="0.55" stop-color="#D4A72C"/>
+      <stop offset="1" stop-color="#B8891E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Deep navy plaque -->
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#kolezNavy)"/>
+  <!-- Outer gold frame -->
+  <rect x="2.9" y="2.9" width="58.2" height="58.2" rx="13.1" fill="none" stroke="url(#kolezGold)" stroke-width="1.8"/>
+  <!-- Inner hairline frame -->
+  <rect x="7.5" y="7.5" width="49" height="49" rx="9.5" fill="none" stroke="#D4A72C" stroke-width="1" opacity="0.38"/>
+
+  <!-- Serif-inspired K monogram -->
+  <g fill="none" stroke="url(#kolezGold)" stroke-width="5.4" stroke-linecap="round">
+    <path d="M23 16.5 V47.5"/>
+    <path d="M44 16.5 L27.2 32 L44 47.5"/>
+  </g>
+
+  <!-- Fountain-pen nib accent on the upper arm -->
+  <path d="M46.6 12.4 l3.1 1.4 -1.4 3.1 -3.1 -1.4 Z" fill="#E7C766"/>
+
+  <!-- Page baseline -->
+  <path d="M18 52.5 H46" stroke="#E7C766" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/>
+</svg>

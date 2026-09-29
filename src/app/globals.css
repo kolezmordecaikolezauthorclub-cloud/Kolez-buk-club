@@ -1,0 +1,202 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ————— KOLEZ BUK CLUB · Brand Design Tokens ————— */
+@theme {
+  /* Brand palette */
+  --color-navy-950: #071b35; /* Deep Navy — primary */
+  --color-navy-900: #0a2242;
+  --color-navy-800: #102d52; /* Royal Navy — secondary */
+  --color-navy-700: #163862;
+  --color-navy-600: #1d4577;
+  --color-gold-500: #d4a72c; /* Premium Gold — accent */
+  --color-gold-400: #e7c766; /* Light Gold */
+  --color-gold-600: #b8891e;
+  --color-gold-100: #f7edd2;
+  --color-soft: #f5f6f8; /* Secondary background */
+  --color-ink: #172033; /* Text — dark navy */
+  --color-ink-muted: #4c576d;
+
+  /* Typography (font-display utility is declared explicitly below —
+     Tailwind v4 drops --font-display from the theme layer) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.375rem;
+  --background: #ffffff;
+  --foreground: #172033;
+  --card: #ffffff;
+  --card-foreground: #172033;
+  --popover: #ffffff;
+  --popover-foreground: #172033;
+  --primary: #071b35;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f6f8;
+  --secondary-foreground: #071b35;
+  --muted: #f5f6f8;
+  --muted-foreground: #4c576d;
+  --accent: #f5f6f8;
+  --accent-foreground: #071b35;
+  --destructive: #b3401e;
+  --border: #e3e6ec;
+  --input: #d7dbe3;
+  --ring: #d4a72c;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "liga" 1, "kern" 1;
+  }
+  ::selection {
+    background: #e7c766;
+    color: #071b35;
+  }
+}
+
+@layer utilities {
+  /* Elegant serif for major headings */
+  .font-display {
+    font-family: var(--font-playfair), Georgia, "Times New Roman", serif;
+  }
+}
+
+/* ————— Custom brand utilities ————— */
+
+/* Letterspaced eyebrow label with gold rule */
+.eyebrow {
+  @apply inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-gold-600;
+}
+.eyebrow::before {
+  content: "";
+  @apply h-px w-8 bg-gold-500;
+}
+.eyebrow--center::after {
+  content: "";
+  @apply h-px w-8 bg-gold-500;
+}
+.eyebrow--onDark {
+  @apply text-gold-400;
+}
+
+/* Gold gradient headline accent */
+.gold-gradient-text {
+  background: linear-gradient(100deg, #e7c766 0%, #d4a72c 55%, #e7c766 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Subtle radial glow texture for navy sections */
+.texture-navy {
+  background-color: #071b35;
+  background-image:
+    radial-gradient(1100px 520px at 85% -10%, rgba(212, 167, 44, 0.09), transparent 60%),
+    radial-gradient(900px 480px at -10% 110%, rgba(29, 69, 119, 0.5), transparent 62%);
+}
+
+/* Hairline gold divider */
+.hairline-gold {
+  @apply h-px w-full bg-gradient-to-r from-transparent via-gold-500/60 to-transparent;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Custom scrollbar (subtle, brand-toned) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f6f8;
+}
+::-webkit-scrollbar-thumb {
+  background: #c3cad6;
+  border-radius: 8px;
+  border: 2px solid #f5f6f8;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4a72c;
+}
+
+/* ——— Hide scrollbars on carousel viewports (scroll/swipe still works) ——— */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* File input hidden (custom trigger UI) */
+.hidden-file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* v2 */
