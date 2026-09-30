@@ -49,7 +49,7 @@ const inputCls =
 
 const SOCIAL_ICONS = { facebook: Facebook, instagram: Instagram, twitter: Twitter, linkedin: Linkedin, book: BookOpen } as const;
 
-export function ContactPage({ intent }: { intent?: string }) {
+export function ContactPage() {
   const [state, setState] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [serverError, setServerError] = useState("");
   const { toast } = useToast();
@@ -77,16 +77,10 @@ export function ContactPage({ intent }: { intent?: string }) {
     defaultValues: {
       name: "",
       email: "",
-      subject: intent === "join" ? "Membership — Join the Club" : "",
+      subject: "",
       message: "",
     },
   });
-
-  useEffect(() => {
-    if (intent === "join") {
-      setValue("subject", "Membership — Join the Club", { shouldValidate: false });
-    }
-  }, [intent, setValue]);
 
   const subject = watch("subject");
 
@@ -161,7 +155,7 @@ export function ContactPage({ intent }: { intent?: string }) {
           </>
         }
       >
-        Questions about membership, your book, or life inside the club? Whatever it is,
+        Questions about the club, your book, or a submission? Whatever it is,
         a real person on the Kolez team will read it and reply.
       </PageHero>
 
@@ -345,7 +339,7 @@ export function ContactPage({ intent }: { intent?: string }) {
                   {siteConfig.email}
                 </a>
                 <p className="mt-7 border-t border-white/10 pt-6 text-sm leading-relaxed text-white/60">
-                  We read every message personally — whether it is about membership, a book
+                  We read every message personally — whether it is about a book
                   submission, a partnership, or simply a hello. Expect a reply from a real
                   member of the team, not an autoresponder.
                 </p>
@@ -358,7 +352,7 @@ export function ContactPage({ intent }: { intent?: string }) {
                   Follow the Club
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-                  Literary conversations, community updates, and announcements — follow
+                  Literary conversations, club updates, and announcements — follow
                   Kolez Buk Club on your favourite platforms.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
@@ -388,8 +382,8 @@ export function ContactPage({ intent }: { intent?: string }) {
                   <OutlineButton to="/submit" className="w-full">
                     Submit Your Book
                   </OutlineButton>
-                  <OutlineButton to="/community" className="w-full">
-                    Explore the Community
+                  <OutlineButton to="/authors" className="w-full">
+                    For Authors
                   </OutlineButton>
                 </div>
               </div>

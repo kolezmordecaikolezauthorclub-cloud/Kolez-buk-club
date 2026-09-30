@@ -12,7 +12,7 @@ import { TestimonialMarquee } from "../testimonial-marquee";
 export function VoicesPage() {
   return (
     <>
-      <PageHero eyebrow="Testimonials" title="What Our Community Says">
+      <PageHero eyebrow="Testimonials" title="What Authors Say">
         A dedicated room for the voices of Kolez Buk Club — the writers who share their
         books here, and the readers who bring those books to life.
       </PageHero>
@@ -27,7 +27,7 @@ export function VoicesPage() {
           <Reveal>
             <span className="inline-flex items-center gap-2.5 border border-gold-500/50 bg-gold-500/10 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.32em] text-gold-400">
               <BadgeCheck className="h-4 w-4" aria-hidden />
-              Real Community Review
+              Real Author Review
             </span>
           </Reveal>
 
@@ -61,7 +61,7 @@ export function VoicesPage() {
                     Grace Adeyemi
                   </span>
                   <span className="mt-1.5 block text-[10.5px] font-semibold uppercase tracking-[0.3em] text-gold-400">
-                    Author · Early Club Member
+                    Author · Featured in the Club
                   </span>
                 </span>
               </figcaption>
@@ -113,19 +113,20 @@ export function VoicesPage() {
           </Reveal>
           <Reveal delay={180}>
             <p className="mt-6 text-[15.5px] leading-relaxed text-ink-muted">
-              As members read, discuss, and connect, their experiences will fill this page
-              with genuine voices. Join the club, be part of the story, and perhaps one day
-              your words will appear here for the next generation of authors and readers.
+              As more authors share their books with the club, their experiences will fill
+              this page with genuine voices. Submit your book, be part of the story, and
+              perhaps one day your words will appear here for the next generation of
+              authors.
             </p>
           </Reveal>
         </div>
       </section>
 
       <CtaBand
-        primaryLabel="Join the Club"
-        primaryTo="/contact?intent=join"
-        secondaryLabel="Submit Your Book"
-        secondaryTo="/submit"
+        primaryLabel="Submit Your Book"
+        primaryTo="/submit"
+        secondaryLabel="Contact Us"
+        secondaryTo="/contact"
       />
     </>
   );

@@ -5,7 +5,7 @@ import {
   Compass,
   Link2,
   MessagesSquare,
-  Users,
+  Sprout,
   BookOpen,
   Feather,
   Quote,
@@ -42,9 +42,9 @@ const PILLARS = [
     text: "Our discussions are deliberate — moderated, curious, and honest — because shallow praise helps nobody.",
   },
   {
-    icon: <Users className="h-5 w-5" aria-hidden />,
-    title: "Community",
-    text: "This is a club, not a marketplace: a standing society of writers and readers who show up for each other's books.",
+    icon: <Sprout className="h-5 w-5" aria-hidden />,
+    title: "Growth",
+    text: "A feature here is not a moment — it is momentum. Conversations become relationships, and relationships become readers who follow an author to their next book.",
   },
 ];
 
@@ -98,10 +98,10 @@ export function AboutPage() {
                 </p>
                 <p>
                   Kolez Buk Club was founded to stand in that gap. We are a literary
-                  community devoted to four commitments: <strong className="font-semibold text-navy-950">discovery</strong>,
+                  club devoted to four commitments: <strong className="font-semibold text-navy-950">discovery</strong>,
                   helping books find the readers they were written for; <strong className="font-semibold text-navy-950">connection</strong>,
                   putting authors and readers in the same conversation; <strong className="font-semibold text-navy-950">discussion</strong>,
-                  giving stories the scrutiny and celebration they deserve; and <strong className="font-semibold text-navy-950">community</strong>,
+                  giving stories the scrutiny and celebration they deserve; and <strong className="font-semibold text-navy-950">growth</strong>,
                   turning single encounters into relationships that last.
                 </p>
                 <p>
@@ -136,7 +136,7 @@ export function AboutPage() {
                 <Eyebrow>Our Vision</Eyebrow>
                 <p className="mt-6 font-display text-2xl font-medium leading-snug text-navy-950 sm:text-[26px]">
                   &ldquo;A literary society known for its judgment and its warmth — where
-                  independent stories outlive their launch week because a community stood
+                  independent stories outlive their launch week because a club stood
                   behind them.&rdquo;
                 </p>
                 <div className="mt-8 h-px w-20 bg-gold-500/60" aria-hidden />
@@ -195,7 +195,7 @@ export function AboutPage() {
             </Reveal>
             <Reveal delay={180}>
               <p className="mt-6 text-[15.5px] leading-relaxed text-ink-muted sm:text-base">
-                No fine print and no games. If you are wondering what powers this community
+                No fine print and no games. If you are wondering what powers this club
                 — and what it asks of the books it features — here is the honest answer.
               </p>
             </Reveal>
@@ -210,7 +210,7 @@ export function AboutPage() {
                 <p className="mt-4 text-[15px] leading-relaxed text-ink-muted">
                   Not a paid-placement promotion service. There are no slots to buy and no
                   queues to jump — every book is selected on the strength of its story, and
-                  nothing else. That rule is what keeps the community&rsquo;s trust, and the
+                  nothing else. That rule is what keeps the club&rsquo;s trust, and the
                   trust is what makes a feature here worth having.
                 </p>
               </article>
@@ -221,8 +221,8 @@ export function AboutPage() {
                   How the Club Is Sustained
                 </h3>
                 <p className="mt-4 text-[15px] leading-relaxed text-ink-muted">
-                  By its own community — the members, the volunteers, and the club&rsquo;s
-                  own resources. Because attention here is never for sale, our selections
+                  By the club&rsquo;s own resources and the volunteers who keep it
+                  running. Because attention here is never for sale, our selections
                   never are either. Merit is the only currency the club recognises.
                 </p>
               </article>
@@ -240,7 +240,7 @@ export function AboutPage() {
             </Reveal>
             <Reveal delay={100}>
               <h2 className="mt-5 font-display text-3xl font-bold leading-tight text-navy-950 sm:text-[42px]">
-                Discovery. Connection. Discussion. Community.
+                Discovery. Connection. Discussion. Growth.
               </h2>
             </Reveal>
             <Reveal delay={180}>
@@ -279,10 +279,10 @@ export function AboutPage() {
       </section>
 
       <CtaBand
-        primaryLabel="Join the Club"
-        primaryTo="/contact?intent=join"
-        secondaryLabel="Submit Your Book"
-        secondaryTo="/submit"
+        primaryLabel="Submit Your Book"
+        primaryTo="/submit"
+        secondaryLabel="Contact Us"
+        secondaryTo="/contact"
       />
     </>
   );

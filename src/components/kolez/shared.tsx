@@ -342,7 +342,7 @@ export function CtaBand({
         <Reveal>
           <p className="font-display text-2xl font-medium leading-snug text-white sm:text-[32px] sm:leading-[1.35]">
             {message ??
-              "Great books deserve more than launch week. Come find your readers — or come find your next favorite story."}
+              "Great books deserve more than launch week. Put your story in front of readers who care."}
           </p>
         </Reveal>
         <Reveal delay={140}>

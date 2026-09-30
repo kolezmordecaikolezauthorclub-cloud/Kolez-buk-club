@@ -8,16 +8,12 @@ import {
   Sprout,
   PenLine,
   HeartHandshake,
-  Library,
   Lightbulb,
-  Coffee,
   Award,
   Users,
-  MessagesSquare as Chat,
   Search,
   Link2,
   BookMarked,
-  Feather,
   ArrowRight,
   Star,
 } from "lucide-react";
@@ -52,7 +48,7 @@ export function HomePage() {
         <div className="relative mx-auto w-full max-w-[1360px] px-5 pb-24 pt-36 text-center lg:px-8 lg:pt-40">
           <Reveal>
             <Eyebrow onDark center>
-              A Curated Literary Community
+              A Curated Literary Club for Authors
             </Eyebrow>
           </Reveal>
 
@@ -66,20 +62,20 @@ export function HomePage() {
 
           <Reveal delay={240}>
             <p className="mx-auto mt-8 max-w-2xl text-[15px] leading-relaxed text-white/75 sm:text-lg">
-              Kolez Buk Club is a reading society with a simple conviction — a good book
-              should never fade away the week it launches. We place independent authors in
-              front of a devoted community of readers for structured discovery, honest
-              discussion, and reviews that give a story a long life.
+              Kolez Buk Club is a literary club with a simple conviction — a good book
+              should never fade away the week it launches. We put independent authors and
+              their stories in front of devoted readers for structured discovery, honest
+              discussion, and reviews that give a book a long life.
             </p>
           </Reveal>
 
           <Reveal delay={360}>
             <div className="mt-11 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <GoldButton to="/contact?intent=join" className="w-full sm:w-auto">
-                Join the Club
-              </GoldButton>
-              <OutlineButton to="/submit" onDark className="w-full sm:w-auto">
+              <GoldButton to="/submit" className="w-full sm:w-auto">
                 Submit Your Book
+              </GoldButton>
+              <OutlineButton to="/authors" onDark className="w-full sm:w-auto">
+                For Authors
               </OutlineButton>
             </div>
           </Reveal>
@@ -111,7 +107,7 @@ export function HomePage() {
         <div className="mx-auto grid max-w-[1360px] items-center gap-14 px-5 lg:grid-cols-2 lg:gap-20 lg:px-8">
           <div>
             <Reveal>
-              <Eyebrow>The Kolez Community</Eyebrow>
+              <Eyebrow>The Kolez Club</Eyebrow>
             </Reveal>
             <Reveal delay={100}>
               <h2 className="mt-5 font-display text-3xl font-bold leading-tight text-navy-950 sm:text-[42px]">
@@ -182,7 +178,7 @@ export function HomePage() {
               </div>
               <div className="absolute -bottom-7 -right-3 max-w-[240px] border border-gold-500/30 bg-navy-950 px-6 py-5 shadow-xl sm:-right-7">
                 <p className="font-display text-[15px] italic leading-snug text-white">
-                  &ldquo;Every great story deserves a community.&rdquo;
+                  &ldquo;Every great story deserves readers who care.&rdquo;
                 </p>
                 <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.3em] text-gold-400">
                   The Kolez Belief
@@ -288,7 +284,7 @@ export function HomePage() {
                 Since 2018, Kolez Buk Club has supported{" "}
                 <span className="text-gold-400">500+ authors</span> and over{" "}
                 <span className="text-gold-400">300+ high quality review clusters</span> —
-                through book discovery, meaningful conversations, and a community
+                through book discovery, meaningful conversations, and a club
                 built around great stories.
               </p>
             </div>
@@ -313,7 +309,7 @@ export function HomePage() {
                 Publishing a book is only the beginning. Once launch week passes, most
                 titles are left to fight for attention alone — and most authors never learn
                 what their readers genuinely thought. Kolez Buk Club offers a different
-                path: a community that takes your book seriously, reads it properly,
+                path: a club that takes your book seriously, reads it properly,
                 discusses it openly, and tells you the truth. Placement here is earned by
                 merit, and attention here is given with intention.
               </p>
@@ -379,96 +375,6 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ————————————— FOR READERS ————————————— */}
-      <section className="texture-navy py-20 sm:py-24 lg:py-28">
-        <div className="mx-auto max-w-[1360px] px-5 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <Reveal>
-              <Eyebrow onDark center>
-                For Readers
-              </Eyebrow>
-            </Reveal>
-            <Reveal delay={100}>
-              <h2 className="mt-5 font-display text-3xl font-bold leading-tight text-white sm:text-[42px]">
-                Discover Stories Worth Talking About.
-              </h2>
-            </Reveal>
-            <Reveal delay={180}>
-              <p className="mt-6 text-[15.5px] leading-relaxed text-white/70 sm:text-base">
-                There is a particular loneliness to loving books in a place that scrolls
-                past them. Kolez Buk Club is a home for readers who want more — more
-                meaning in what they read, more honesty in how they talk about it, and a
-                real connection to the people who write it. Every book you meet here was
-                chosen because someone believed in it.
-              </p>
-            </Reveal>
-          </div>
-
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            <Reveal delay={0}>
-              <FeatureCard
-                onDark
-                icon={<Library className="h-5 w-5" aria-hidden />}
-                title="Discover New Books"
-              >
-                Find titles chosen for their quality and heart — stories that may never surface on a bestseller feed.
-              </FeatureCard>
-            </Reveal>
-            <Reveal delay={80}>
-              <FeatureCard
-                onDark
-                icon={<PenLine className="h-5 w-5" aria-hidden />}
-                title="Meet Authors"
-              >
-                Meet the minds behind the stories and ask the questions you have always wanted to ask.
-              </FeatureCard>
-            </Reveal>
-            <Reveal delay={160}>
-              <FeatureCard
-                onDark
-                icon={<Chat className="h-5 w-5" aria-hidden />}
-                title="Join Discussions"
-              >
-                Talk about ideas, characters, and craft with people who take stories seriously.
-              </FeatureCard>
-            </Reveal>
-            <Reveal delay={0}>
-              <FeatureCard
-                onDark
-                icon={<Feather className="h-5 w-5" aria-hidden />}
-                title="Share Your Voice"
-              >
-                Your honest review is not background noise here — it shapes how a book travels.
-              </FeatureCard>
-            </Reveal>
-            <Reveal delay={80}>
-              <FeatureCard
-                onDark
-                icon={<Users className="h-5 w-5" aria-hidden />}
-                title="Meet Other Readers"
-              >
-                Find your people: readers whose shelves and judgments you will learn to trust.
-              </FeatureCard>
-            </Reveal>
-            <Reveal delay={160}>
-              <FeatureCard
-                onDark
-                icon={<Coffee className="h-5 w-5" aria-hidden />}
-                title="Take Part in Events"
-              >
-                Reading seasons, author sessions, and gatherings that give your reading a rhythm.
-              </FeatureCard>
-            </Reveal>
-          </div>
-
-          <Reveal delay={120}>
-            <div className="mt-12 text-center">
-              <GoldButton to="/contact?intent=join">Join the Community</GoldButton>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       {/* ————————————— HOW KOLEZ WORKS ————————————— */}
       <section className="bg-white py-20 sm:py-24 lg:py-28">
         <div className="mx-auto max-w-[1360px] px-5 lg:px-8">
@@ -492,9 +398,9 @@ export function HomePage() {
 
           <ol className="mt-16 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { n: "01", t: "Discover", d: "A book is submitted and thoughtfully reviewed by the Kolez team before it ever reaches the community." },
+              { n: "01", t: "Discover", d: "A book is submitted and thoughtfully reviewed by the Kolez team before it ever reaches its readers." },
               { n: "02", t: "Connect", d: "The right readers are brought to the right story — introduced as a discovery worth their time." },
-              { n: "03", t: "Read", d: "Members read properly and at their own pace. Depth over speed is the unwritten rule." },
+              { n: "03", t: "Read", d: "Every book is read properly and at its own pace. Depth over speed is the unwritten rule." },
               { n: "04", t: "Discuss", d: "The club gathers around the book — questions, interpretations, and honest debate." },
               { n: "05", t: "Engage", d: "The author joins the conversation and hears what readers truly think." },
               { n: "06", t: "Grow", d: "Reviews, recommendations, and relationships carry the book far beyond its first week." },
@@ -561,17 +467,17 @@ export function HomePage() {
             <Reveal delay={80}>
               <FeatureCard
                 icon={<BookMarked className="h-5 w-5" aria-hidden />}
-                title="Readers"
+                title="Your Readers"
               >
-                A place to discover books chosen with care — and the voices behind them.
+                Devoted readers who show up for books — reading closely and carrying yours onward.
               </FeatureCard>
             </Reveal>
             <Reveal delay={160}>
               <FeatureCard
                 icon={<Users className="h-5 w-5" aria-hidden />}
-                title="Community"
+                title="The Club"
               >
-                A society of people who still believe stories are worth talking about.
+                A society that still believes stories are worth talking about — and shows up for them.
               </FeatureCard>
             </Reveal>
             <Reveal delay={240}>
@@ -594,10 +500,11 @@ export function HomePage() {
 
       {/* ————————————— FINAL CTA ————————————— */}
       <CtaBand
-        primaryLabel="Join the Club"
-        primaryTo="/contact?intent=join"
-        secondaryLabel="Submit Your Book"
-        secondaryTo="/submit"
+        message="Great books deserve more than launch week. Put your story in front of readers who care."
+        primaryLabel="Submit Your Book"
+        primaryTo="/submit"
+        secondaryLabel="For Authors"
+        secondaryTo="/authors"
       />
     </>
   );

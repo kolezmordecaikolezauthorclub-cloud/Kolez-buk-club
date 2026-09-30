@@ -31,11 +31,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://kolezbukclub.vercel.app"),
   title: {
     default:
-      "Kolez Buk Club | Where Authors, Readers, and Great Stories Come Together",
+      "Kolez Buk Club | Where Authors and Great Stories Come Together",
     template: "%s | Kolez Buk Club",
   },
   description:
-    "Kolez Buk Club is a curated literary community connecting independent authors with an engaged reading society — structured discovery, honest discussion, and stories that outlive launch week.",
+    "Kolez Buk Club is a curated literary club for independent authors — structured book discovery, honest discussion, and reviews that give stories a lasting life.",
   keywords: [
     "Kolez Buk Club",
     "kolezbukclub",
@@ -43,17 +43,16 @@ export const metadata: Metadata = {
     "Kolez Mordecai",
     "Kolez Buk Club official website",
     "author community",
-    "reader community",
-    "literary community",
+    "literary club",
     "book club",
     "writers community",
     "author network",
     "book discussion",
     "independent authors",
-    "author reader community",
+    "author support",
     "literary events",
     "book discovery",
-    "author support",
+    "submit your book",
   ],
   authors: [{ name: "Kolez Buk Club" }],
   creator: "Kolez Buk Club",
@@ -66,16 +65,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Kolez Buk Club",
-    title: "Kolez Buk Club | Where Authors, Readers, and Great Stories Come Together",
+    title: "Kolez Buk Club | Where Authors and Great Stories Come Together",
     description:
-      "A curated literary community connecting independent authors and devoted readers through structured discovery, honest conversation, and stories that outlive launch week.",
+      "A curated literary club for independent authors — structured book discovery, honest conversation, and stories that outlive launch week.",
     images: [{ url: "/images/hero-home.jpg", width: 1600, height: 1199, alt: "Kolez Buk Club" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Kolez Buk Club",
     description:
-      "Where Authors, Readers, and Great Stories Come Together. Join a literary community built around discovery, conversation, and connection.",
+      "Where Authors and Great Stories Come Together. Submit your book to a literary club built around discovery, honest conversation, and lasting connection.",
   },
   alternates: {
     canonical: "/",
@@ -103,8 +102,8 @@ const jsonLd = {
       url: "https://kolezbukclub.vercel.app",
       logo: "https://kolezbukclub.vercel.app/kolez-logo.svg",
       description:
-        "Kolez Buk Club brings independent authors and devoted readers together through merit-based book discovery, honest discussion, and a community that gives stories a lasting life.",
-      slogan: "Where Authors, Readers, and Great Stories Come Together.",
+        "Kolez Buk Club gives independent authors' books a lasting reading life through merit-based book discovery, honest discussion, and devoted readers.",
+      slogan: "Where Authors and Great Stories Come Together.",
       email: siteConfig.email,
       sameAs: siteConfig.socials.map((s) => s.href),
     },
@@ -115,7 +114,7 @@ const jsonLd = {
       name: "Kolez Buk Club",
       alternateName: "kolezbukclub",
       description:
-        "A curated literary community connecting independent authors and devoted readers through structured discovery, honest conversation, and stories that outlive launch week.",
+        "A curated literary club for independent authors — structured book discovery, honest conversation, and stories that outlive launch week.",
       publisher: { "@id": "https://kolezbukclub.vercel.app/#organization" },
       inLanguage: "en",
     },

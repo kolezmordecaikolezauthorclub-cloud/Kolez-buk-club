@@ -5,7 +5,7 @@ import { Menu, X, BookOpen, PenLine, Mail } from "lucide-react";
 import { NAV_ITEMS, siteConfig } from "@/lib/site";
 import { hrefFor } from "@/lib/router";
 import { cn } from "@/lib/utils";
-import { GoldButton, KolezLogo, OutlineButton } from "./shared";
+import { GoldButton, KolezLogo } from "./shared";
 
 export function SiteHeader({ currentRoute }: { currentRoute: string }) {
   const [open, setOpen] = useState(false);
@@ -68,11 +68,8 @@ export function SiteHeader({ currentRoute }: { currentRoute: string }) {
 
         {/* Desktop CTAs */}
         <div className="hidden items-center gap-3 lg:flex">
-          <OutlineButton to="/submit" onDark className="hidden px-5 py-2.5 text-[11px] 2xl:inline-flex">
+          <GoldButton to="/submit" className="px-5 py-2.5 text-[11px]">
             Submit Your Book
-          </OutlineButton>
-          <GoldButton to="/contact?intent=join" className="px-5 py-2.5 text-[11px]">
-            Join the Club
           </GoldButton>
         </div>
 
@@ -157,12 +154,9 @@ export function SiteHeader({ currentRoute }: { currentRoute: string }) {
             </ul>
 
             <div className="mt-8 flex flex-col gap-3">
-              <GoldButton to="/contact?intent=join" className="w-full">
-                Join the Club
-              </GoldButton>
-              <OutlineButton to="/submit" onDark className="w-full">
+              <GoldButton to="/submit" className="w-full">
                 Submit Your Book
-              </OutlineButton>
+              </GoldButton>
             </div>
 
             <div className="mt-10 space-y-3 border-t border-white/10 pt-6 text-sm text-white/60">
@@ -175,11 +169,11 @@ export function SiteHeader({ currentRoute }: { currentRoute: string }) {
               </a>
               <p className="flex items-center gap-2.5">
                 <BookOpen className="h-4 w-4 text-gold-400" />
-                A community built around stories
+                A club built around authors
               </p>
               <p className="flex items-center gap-2.5">
                 <PenLine className="h-4 w-4 text-gold-400" />
-                Est. for authors &amp; readers
+                Est. for authors
               </p>
             </div>
           </nav>

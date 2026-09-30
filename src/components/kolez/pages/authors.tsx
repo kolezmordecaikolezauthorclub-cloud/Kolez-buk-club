@@ -27,7 +27,7 @@ const BENEFITS = [
   {
     icon: <BookOpen className="h-5 w-5" aria-hidden />,
     title: "Book Discovery",
-    text: "Your book is introduced to a community of readers actively hunting for their next great find — presented as a discovery, never as an ad.",
+    text: "Your book is introduced to devoted readers actively hunting for their next great find — presented as a discovery, never as an ad.",
   },
   {
     icon: <HeartHandshake className="h-5 w-5" aria-hidden />,
@@ -57,12 +57,12 @@ const BENEFITS = [
   {
     icon: <CalendarDays className="h-5 w-5" aria-hidden />,
     title: "Literary Events",
-    text: "Author sessions, reading seasons, and community events that keep your book in circulation between releases.",
+    text: "Author sessions, reading seasons, and club events that keep your book in circulation between releases.",
   },
   {
     icon: <Handshake className="h-5 w-5" aria-hidden />,
-    title: "Community Participation",
-    text: "Be a member, not a guest. Support other authors' books and build a reputation that follows your next release.",
+    title: "Club Participation",
+    text: "Be a part of the club, not a passing guest. Support other authors' books and build a reputation that follows your next release.",
   },
 ];
 
@@ -107,7 +107,7 @@ export function AuthorsPage() {
                   </p>
                   <p>
                     Kolez Buk Club replaces the moment with a relationship. Your book enters
-                    a community that reads closely, discusses openly, and reviews honestly —
+                    a club that reads closely, discusses openly, and reviews honestly —
                     and it keeps working long after launch week, because readers here are
                     still arriving, still asking, still talking.
                   </p>
@@ -220,7 +220,7 @@ export function AuthorsPage() {
                   </p>
                   <p>
                     And when the busiest weeks pass, the most valuable part remains: a
-                    community of readers and fellow writers who know your name, your story,
+                    circle of readers and fellow writers who know your name, your story,
                     and your next book.
                   </p>
                 </div>
@@ -239,8 +239,8 @@ export function AuthorsPage() {
         message="Ready to place your book in front of readers who care about stories?"
         primaryLabel="Submit Your Book"
         primaryTo="/submit"
-        secondaryLabel="Join the Club"
-        secondaryTo="/contact?intent=join"
+        secondaryLabel="Contact Us"
+        secondaryTo="/contact"
       />
     </>
   );

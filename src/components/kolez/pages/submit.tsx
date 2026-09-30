@@ -322,7 +322,7 @@ export function SubmitPage() {
           "Book Website": values.bookWebsite || "—",
           "Purchase Link": values.purchaseLink || "—",
           "Social Media": values.socialMedia || "—",
-          "Why Join Kolez": values.motivation,
+          "Author's Intentions": values.motivation,
           Attachments:
             [
               values.coverFile ? "Book cover uploaded" : null,
@@ -370,12 +370,12 @@ export function SubmitPage() {
                 Thank you for sharing <strong className="font-semibold text-navy-950">&ldquo;{submittedTitle}&rdquo;</strong>{" "}
                 with Kolez Buk Club. Our team will review your submission and reach out to{" "}
                 <strong className="font-semibold text-navy-950">{watch("email")}</strong> about
-                the next steps — introducing your work to readers, discussions, and the
-                community.
+                the next steps — introducing your work to readers, discussions, and
+                honest reviews.
               </p>
               <div className="mx-auto mt-8 h-px w-24 bg-gold-500/60" aria-hidden />
               <p className="mt-8 font-display text-lg italic text-navy-800">
-                &ldquo;Every great story deserves a community.&rdquo;
+                &ldquo;Every great story deserves readers who care.&rdquo;
               </p>
               <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
                 <OutlineButton
@@ -386,7 +386,7 @@ export function SubmitPage() {
                 >
                   Submit Another Book
                 </OutlineButton>
-                <GoldButton to="/community">Explore the Community</GoldButton>
+                <GoldButton to="/authors">Explore Author Benefits</GoldButton>
               </div>
             </div>
           </div>
@@ -583,15 +583,15 @@ export function SubmitPage() {
                   </legend>
                   <div className="mt-7">
                     <Field
-                      label="Why would you like to join Kolez Buk Club?"
+                      label="Why would you like your book to be featured in Kolez Buk Club?"
                       required
                       error={errors.motivation?.message}
-                      hint="Tell us what you hope to achieve — connection, feedback, discovery, community."
+                      hint="Tell us what you hope to achieve — connection, feedback, discovery, growth."
                     >
                       <Textarea
                         {...register("motivation")}
                         rows={5}
-                        placeholder="What do you hope to achieve through the Kolez community?"
+                        placeholder="What do you hope to achieve for your book through Kolez?"
                         className="min-h-[120px] rounded-sm bg-white text-[15px] shadow-none focus-visible:border-gold-500 focus-visible:ring-2 focus-visible:ring-gold-400/40"
                       />
                     </Field>
@@ -646,7 +646,7 @@ export function SubmitPage() {
                     {
                       n: "2",
                       t: "Introduction",
-                      d: "If it meets the club's standard, it is prepared for a proper introduction to the community.",
+                      d: "If it meets the club's standard, it is prepared for a proper introduction to the club's readers.",
                     },
                     {
                       n: "3",

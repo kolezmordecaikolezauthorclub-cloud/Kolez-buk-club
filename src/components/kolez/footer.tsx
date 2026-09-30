@@ -15,7 +15,7 @@ const SOCIAL_ICONS: Record<string, typeof Facebook> = {
 
 export function SiteFooter() {
   const explore = NAV_ITEMS.filter((item) =>
-    ["about", "authors", "readers", "experience", "community", "voices"].includes(item.key)
+    ["about", "authors", "experience", "voices"].includes(item.key)
   );
 
   return (
@@ -71,8 +71,8 @@ export function SiteFooter() {
                 </a>
               </li>
               <li>
-                <a href={hrefFor("/contact?intent=join")} className="text-sm text-white/65 transition-colors hover:text-gold-400">
-                  Join the Club
+                <a href={hrefFor("/authors")} className="text-sm text-white/65 transition-colors hover:text-gold-400">
+                  For Authors
                 </a>
               </li>
               <li>

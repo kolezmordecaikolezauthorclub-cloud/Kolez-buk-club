@@ -32,9 +32,9 @@ const STAGES = [
     n: "03",
     icon: <BookOpen className="h-5 w-5" aria-hidden />,
     title: "Read",
-    lead: "The community gives the book its most valuable gift: time.",
+    lead: "The club gives the book its most valuable gift: time.",
     detail:
-      "No rushing and no skimming. Members are encouraged to live inside the story at its own pace, because a reading community and a promotional channel are two very different things — and we only ever intend to be the first one.",
+      "No rushing and no skimming. Every reader is encouraged to live inside the story at its own pace, because a reading club and a promotional channel are two very different things — and we only ever intend to be the first one.",
   },
   {
     n: "04",
@@ -42,7 +42,7 @@ const STAGES = [
     title: "Discuss",
     lead: "Private reading becomes shared experience.",
     detail:
-      "Discussion is where the club comes alive. Members gather around characters, ideas, and craft, carrying their questions to the author and hearing answers that change how the book reads. Honest debate is welcome here; empty applause is not.",
+      "Discussion is where the club comes alive. Readers gather around characters, ideas, and craft, carrying their questions to the author and hearing answers that change how the book reads. Honest debate is welcome here; empty applause is not.",
   },
   {
     n: "05",
@@ -71,7 +71,7 @@ export function ExperiencePage() {
         image="/images/notebook-gold.jpg"
         imageAlt="A navy and gold marbled notebook with a fountain pen"
       >
-        How authors and readers move through the community — six deliberate stages that
+        How a book moves through the club — six deliberate stages that
         carry a story from first discovery to lasting recognition.
       </PageHero>
 
@@ -83,20 +83,20 @@ export function ExperiencePage() {
           </Reveal>
           <Reveal delay={100}>
             <h2 className="mt-5 font-display text-3xl font-bold leading-tight text-navy-950 sm:text-[42px]">
-              One Journey. Two Perspectives.
+              One Journey. Every Stage Deliberate.
             </h2>
           </Reveal>
           <Reveal delay={180}>
             <div className="mt-6 space-y-5 text-[15.5px] leading-relaxed text-ink-muted">
               <p>
                 For an author, the journey begins the day a manuscript is submitted and
-                unfolds into discovery, discussion, and a readership that stays. For a
-                reader, it begins with the thrill of finding something unfamiliar — and
-                matures into connection, conversation, and belonging.
+                unfolds into discovery, discussion, and a readership that stays. For the
+                book, it begins with a careful first read — and matures into conversation,
+                recognition, and a life that outlives launch week.
               </p>
               <p>
-                Both journeys pass through the same six stages. Each one is deliberate and
-                human, designed to give books the one thing no algorithm can manufacture:
+                Every book passes through the same six stages. Each one is deliberate and
+                human, designed to give stories the one thing no algorithm can manufacture:
                 real attention from real people.
               </p>
             </div>
@@ -183,8 +183,8 @@ export function ExperiencePage() {
             </Reveal>
             <Reveal delay={240}>
               <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-                <GoldButton to="/contact?intent=join">Begin Your Journey</GoldButton>
-                <OutlineButton to="/submit">Submit Your Book</OutlineButton>
+                <GoldButton to="/submit">Submit Your Book</GoldButton>
+                <OutlineButton to="/contact">Contact Us</OutlineButton>
               </div>
             </Reveal>
           </div>
@@ -192,11 +192,11 @@ export function ExperiencePage() {
       </section>
 
       <CtaBand
-        message="Six stages. One community. Countless stories waiting to be discovered."
-        primaryLabel="Join the Club"
-        primaryTo="/contact?intent=join"
-        secondaryLabel="Submit Your Book"
-        secondaryTo="/submit"
+        message="Six stages. One club. Countless stories waiting to be discovered."
+        primaryLabel="Submit Your Book"
+        primaryTo="/submit"
+        secondaryLabel="Contact Us"
+        secondaryTo="/contact"
       />
     </>
   );
