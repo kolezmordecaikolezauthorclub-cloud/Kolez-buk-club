@@ -20,10 +20,6 @@ import {
   Feather,
   ArrowRight,
   Star,
-  Facebook,
-  Instagram,
-  Twitter,
-  Linkedin,
 } from "lucide-react";
 import {
   CtaBand,
@@ -34,18 +30,9 @@ import {
   Reveal,
 } from "../shared";
 import { AuthorTestimonials } from "../author-testimonials";
-import { SocialMarquee } from "../social-marquee";
-import { siteConfig } from "@/lib/site";
+import { SeenOn } from "../seen-on";
 
 const HERO_WORDMARKS = ["Discover", "Connect", "Discuss", "Grow"] as const;
-
-const AS_SEEN_ICONS: Record<string, typeof Facebook> = {
-  facebook: Facebook,
-  instagram: Instagram,
-  twitter: Twitter,
-  linkedin: Linkedin,
-  book: BookOpen,
-};
 
 export function HomePage() {
   return (
@@ -603,44 +590,7 @@ export function HomePage() {
       <AuthorTestimonials />
 
       {/* ————————————— AS SEEN ON ————————————— */}
-      <section aria-label="As seen on" className="border-y border-border bg-white py-10 sm:py-12">
-        <div className="mx-auto max-w-[1360px] px-5 lg:px-8">
-          <Reveal>
-            <p className="text-center text-[11px] font-semibold uppercase tracking-[0.34em] text-navy-950/70">
-              As Seen On:
-            </p>
-          </Reveal>
-        </div>
-
-        <Reveal delay={120}>
-          <div className="relative mt-8 overflow-hidden">
-            <div
-              className="pointer-events-none absolute inset-y-0 left-0 z-[5] hidden w-24 bg-gradient-to-r from-white to-transparent lg:block"
-              aria-hidden
-            />
-            <div
-              className="pointer-events-none absolute inset-y-0 right-0 z-[5] hidden w-24 bg-gradient-to-l from-white to-transparent lg:block"
-              aria-hidden
-            />
-            {/* Decorative, non-clickable, continuously left-scrolling strip */}
-            <SocialMarquee>
-              {siteConfig.socials.map((social) => {
-                const Icon = AS_SEEN_ICONS[social.icon] ?? BookOpen;
-                return (
-                  <span key={social.label} className="flex items-center gap-3.5">
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-gold-500/40 bg-gold-500/10 text-gold-600">
-                      <Icon className="h-5 w-5" aria-hidden />
-                    </span>
-                    <span className="whitespace-nowrap font-display text-lg font-semibold text-navy-950/85">
-                      {social.label}
-                    </span>
-                  </span>
-                );
-              })}
-            </SocialMarquee>
-          </div>
-        </Reveal>
-      </section>
+      <SeenOn />
 
       {/* ————————————— FINAL CTA ————————————— */}
       <CtaBand
