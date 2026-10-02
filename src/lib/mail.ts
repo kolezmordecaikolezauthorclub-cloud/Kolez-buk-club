@@ -5,15 +5,18 @@
  * (kolezmordecai.kolezauthorclub@gmail.com) using FormSubmit's
  * form-to-email relay:
  *
- *  1. `forwardToInbox`  — AJAX request from the visitor's browser (primary path).
- *     Keeps the visitor on the page; returns true when the relay accepted the
- *     message for delivery.
- *  2. `fallbackFormSubmit` — classic full-page form POST (fallback path).
- *     Used when the AJAX request is blocked; the relay redirects back to the
- *     site with `?sent=1` so the page can show its success state.
+ *  1. `forwardToInbox`  — AJAX request from the visitor's browser (primary path
+ *     for text-only forms). Keeps the visitor on the page; returns true when the
+ *     relay accepted the message for delivery.
+ *  2. `fallbackFormSubmit` — classic full-page form POST. Used when the AJAX
+ *     request is blocked, and to carry file attachments: the AJAX relay only
+ *     accepts JSON, so uploaded files can only travel through this multipart
+ *     form. The relay redirects back to the site with `?sent=1` so the page can
+ *     show its success state.
  *
- * Every submission is ALSO saved to the local database by the API routes as a
- * backup, so no message can be lost even while the relay is not yet activated.
+ * The database write in the API routes is a best-effort backup only: on hosts
+ * without a persistent disk (e.g. Vercel's free tier) it is temporary, so the
+ * relay is the delivery path that has to succeed.
  *
  * NOTE (one-time activation): the first submission triggers an activation
  * email from FormSubmit to the inbox owner, who must click the confirmation
@@ -64,12 +67,18 @@ export async function forwardToInbox(
 /**
  * Fallback: post a hidden classic form straight to the relay. The browser
  * navigates away briefly and the relay redirects back to `?sent=1`, where the
- * contact page shows its success state.
+ * page shows its success state.
+ *
+ * Pass `files` to attach uploads to the email. The AJAX relay accepts JSON only,
+ * so the multipart form is the one delivery path that can carry a visitor's
+ * uploaded files; FormSubmit rejects a submission whose attachments total more
+ * than 10MB, which is why callers keep their uploads within that budget.
  */
 export function fallbackFormSubmit(
   fields: Record<string, string>,
   emailSubject: string,
-  returnHash = "#/contact"
+  returnHash = "#/contact",
+  files: Array<{ name: string; file: File }> = []
 ): void {
   if (typeof window === "undefined") return;
 
@@ -77,6 +86,7 @@ export function fallbackFormSubmit(
   form.method = "POST";
   form.action = `https://formsubmit.co/${INBOX_EMAIL}`;
   form.style.display = "none";
+  if (files.length > 0) form.enctype = "multipart/form-data";
 
   const payload: Record<string, string> = {
     ...fields,
@@ -91,6 +101,16 @@ export function fallbackFormSubmit(
     input.type = "hidden";
     input.name = key;
     input.value = value;
+    form.appendChild(input);
+  }
+
+  for (const { name, file } of files) {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.name = name;
+    const transfer = new DataTransfer();
+    transfer.items.add(file);
+    input.files = transfer.files;
     form.appendChild(input);
   }
 
