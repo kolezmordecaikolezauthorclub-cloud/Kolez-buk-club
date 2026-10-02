@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -16,7 +16,7 @@ import {
   X,
 } from "lucide-react";
 import { BOOK_GENRES } from "@/lib/site";
-import { forwardToInbox } from "@/lib/mail";
+import { forwardToInbox, fallbackFormSubmit } from "@/lib/mail";
 import { cn } from "@/lib/utils";
 import {
   Eyebrow,
@@ -280,6 +280,26 @@ export function SubmitPage() {
     setValue(field, file, { shouldValidate: true });
   };
 
+  // Handle the return trip from the classic-form relay fallback
+  // (?sent=1 is appended when FormSubmit redirects back to the site).
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const sent = new URLSearchParams(window.location.search).get("sent");
+    if (sent !== "1") return;
+    try {
+      const title = window.sessionStorage.getItem("kolez:lastSubmissionTitle") ?? "";
+      const email = window.sessionStorage.getItem("kolez:lastSubmissionEmail") ?? "";
+      if (email) setValue("email", email);
+      setSubmittedTitle(title);
+      window.sessionStorage.removeItem("kolez:lastSubmissionTitle");
+      window.sessionStorage.removeItem("kolez:lastSubmissionEmail");
+    } catch {
+      // sessionStorage unavailable — still show the success state below.
+    }
+    setSubmitState("success");
+    window.history.replaceState(null, "", window.location.pathname + window.location.hash);
+  }, [setValue]);
+
   const onSubmit = async (values: BookFormValues) => {
     setSubmitState("sending");
     setServerError("");
@@ -306,33 +326,49 @@ export function SubmitPage() {
         throw new Error(data.error || "Something went wrong. Please try again.");
       }
 
-      // Best-effort: also forward the submission details to the club's Gmail
-      // inbox. Uploaded files stay stored on the club server; the email
-      // summarises the entry. Never blocks or breaks the success flow.
-      void forwardToInbox(
-        {
-          Author: values.authorName,
-          "Full Name": values.fullName,
-          Email: values.email,
-          Phone: values.phone,
-          "Book Title": values.bookTitle,
-          Genre: values.genre,
-          Description: values.description,
-          "Publication Date": values.publicationDate || "—",
-          "Book Website": values.bookWebsite || "—",
-          "Purchase Link": values.purchaseLink || "—",
-          "Social Media": values.socialMedia || "—",
-          "Author's Intentions": values.motivation,
-          Attachments:
-            [
-              values.coverFile ? "Book cover uploaded" : null,
-              values.sampleFile ? "Sample chapter uploaded" : null,
-            ]
-              .filter(Boolean)
-              .join("; ") || "None",
-        },
-        `Kolez Book Submission — ${values.bookTitle}`
-      ).catch(() => undefined);
+      // Deliver the submission to the club's Gmail inbox through the FormSubmit
+      // relay — the primary path on hosts without a persistent disk. Success is
+      // reported only once the relay accepts the message; if the visitor's AJAX
+      // request is blocked, the classic-form fallback takes over and the relay
+      // redirects back with ?sent=1, which restores the success state above.
+      const emailFields = {
+        Author: values.authorName,
+        "Full Name": values.fullName,
+        Email: values.email,
+        Phone: values.phone,
+        "Book Title": values.bookTitle,
+        Genre: values.genre,
+        Description: values.description,
+        "Publication Date": values.publicationDate || "—",
+        "Book Website": values.bookWebsite || "—",
+        "Purchase Link": values.purchaseLink || "—",
+        "Social Media": values.socialMedia || "—",
+        "Author's Intentions": values.motivation,
+        Attachments:
+          [
+            values.coverFile ? "Book cover uploaded" : null,
+            values.sampleFile ? "Sample chapter uploaded" : null,
+          ]
+            .filter(Boolean)
+            .join("; ") || "None",
+      };
+      const emailSubject = `Kolez Book Submission — ${values.bookTitle}`;
+
+      const forwarded = await forwardToInbox(emailFields, emailSubject);
+
+      if (!forwarded) {
+        // The browser relay is unreachable — hand off through a classic form
+        // post; the relay redirects back with ?sent=1 which restores the
+        // success state above. Keep the book title for that return trip.
+        try {
+          window.sessionStorage.setItem("kolez:lastSubmissionTitle", values.bookTitle);
+          window.sessionStorage.setItem("kolez:lastSubmissionEmail", values.email);
+        } catch {
+          // sessionStorage unavailable — the success view falls back to a generic message.
+        }
+        fallbackFormSubmit(emailFields, emailSubject, "#/submit");
+        return;
+      }
 
       setSubmittedTitle(values.bookTitle);
       setSubmitState("success");
