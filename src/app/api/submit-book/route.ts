@@ -11,6 +11,7 @@ export const dynamic = "force-dynamic";
 
 const MAX_COVER_BYTES = 5 * 1024 * 1024;
 const MAX_SAMPLE_BYTES = 10 * 1024 * 1024;
+const MAX_TOTAL_BYTES = 10 * 1024 * 1024;
 
 const COVER_TYPES: Record<string, string> = {
   "image/jpeg": ".jpg",
@@ -89,6 +90,24 @@ export async function POST(req: NextRequest) {
     let sampleFileName: string | null = null;
 
     const cover = form.get("coverFile");
+    const sample = form.get("sampleFile");
+
+    // Uploaded files ride to the club inbox as email attachments via the
+    // FormSubmit relay, which caps their combined size at 10MB — reject
+    // anything larger before it is stored or handed to the relay.
+    const totalUploadBytes =
+      (cover instanceof File ? cover.size : 0) +
+      (sample instanceof File ? sample.size : 0);
+    if (totalUploadBytes > MAX_TOTAL_BYTES) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: "Book cover and sample chapter together must be 10MB or less.",
+        },
+        { status: 400 }
+      );
+    }
+
     if (cover instanceof File && cover.size > 0) {
       if (cover.size > MAX_COVER_BYTES) {
         return NextResponse.json(
@@ -112,7 +131,6 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const sample = form.get("sampleFile");
     if (sample instanceof File && sample.size > 0) {
       if (sample.size > MAX_SAMPLE_BYTES) {
         return NextResponse.json(

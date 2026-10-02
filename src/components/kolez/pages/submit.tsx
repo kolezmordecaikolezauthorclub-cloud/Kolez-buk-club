@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -16,7 +16,7 @@ import {
   X,
 } from "lucide-react";
 import { BOOK_GENRES } from "@/lib/site";
-import { forwardToInbox } from "@/lib/mail";
+import { forwardToInbox, fallbackFormSubmit } from "@/lib/mail";
 import { cn } from "@/lib/utils";
 import {
   Eyebrow,
@@ -102,7 +102,14 @@ const bookSchema = z
       )
       .optional()
       .nullable(),
-  });
+  })
+  .refine(
+    (v) => (v.coverFile?.size ?? 0) + (v.sampleFile?.size ?? 0) <= MAX_SAMPLE_MB * 1024 * 1024,
+    {
+      message: `Cover and sample chapter together must be ${MAX_SAMPLE_MB}MB or less`,
+      path: ["sampleFile"],
+    }
+  );
 
 type BookFormValues = z.infer<typeof bookSchema>;
 
@@ -245,6 +252,24 @@ export function SubmitPage() {
   const [submittedTitle, setSubmittedTitle] = useState("");
   const { toast } = useToast();
 
+  // Handle the return trip from the classic-form relay when a submission with
+  // attachments was delivered there (?sent=1 is appended on the redirect back).
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const sent = new URLSearchParams(window.location.search).get("sent");
+    if (sent === "1") {
+      const title = window.sessionStorage.getItem("kolez.submittedTitle") ?? "";
+      window.sessionStorage.removeItem("kolez.submittedTitle");
+      setSubmittedTitle(title);
+      setSubmitState("success");
+      window.history.replaceState(
+        null,
+        "",
+        window.location.pathname + window.location.hash
+      );
+    }
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -306,33 +331,51 @@ export function SubmitPage() {
         throw new Error(data.error || "Something went wrong. Please try again.");
       }
 
-      // Best-effort: also forward the submission details to the club's Gmail
-      // inbox. Uploaded files stay stored on the club server; the email
-      // summarises the entry. Never blocks or breaks the success flow.
-      void forwardToInbox(
-        {
-          Author: values.authorName,
-          "Full Name": values.fullName,
-          Email: values.email,
-          Phone: values.phone,
-          "Book Title": values.bookTitle,
-          Genre: values.genre,
-          Description: values.description,
-          "Publication Date": values.publicationDate || "—",
-          "Book Website": values.bookWebsite || "—",
-          "Purchase Link": values.purchaseLink || "—",
-          "Social Media": values.socialMedia || "—",
-          "Author's Intentions": values.motivation,
-          Attachments:
-            [
-              values.coverFile ? "Book cover uploaded" : null,
-              values.sampleFile ? "Sample chapter uploaded" : null,
-            ]
-              .filter(Boolean)
-              .join("; ") || "None",
-        },
-        `Kolez Book Submission — ${values.bookTitle}`
-      ).catch(() => undefined);
+      const emailSubject = `Kolez Book Submission — ${values.bookTitle}`;
+      const details = {
+        Author: values.authorName,
+        "Full Name": values.fullName,
+        Email: values.email,
+        Phone: values.phone,
+        "Book Title": values.bookTitle,
+        Genre: values.genre,
+        Description: values.description,
+        "Publication Date": values.publicationDate || "—",
+        "Book Website": values.bookWebsite || "—",
+        "Purchase Link": values.purchaseLink || "—",
+        "Social Media": values.socialMedia || "—",
+        "Author's Intentions": values.motivation,
+        Attachments:
+          [
+            values.coverFile ? `Book cover (${values.coverFile.name})` : null,
+            values.sampleFile ? `Sample chapter (${values.sampleFile.name})` : null,
+          ]
+            .filter(Boolean)
+            .join("; ") || "None",
+      };
+
+      const attachments: Array<{ name: string; file: File }> = [];
+      if (values.coverFile) attachments.push({ name: "attachment", file: values.coverFile });
+      if (values.sampleFile) attachments.push({ name: "attachment", file: values.sampleFile });
+
+      if (attachments.length > 0) {
+        // The AJAX relay accepts JSON only, so uploads cannot ride it. Deliver
+        // the whole submission (fields + files) through FormSubmit's multipart
+        // form so the cover and sample chapter actually reach the club; the
+        // relay redirects back to `?sent=1` where the success view is shown.
+        window.sessionStorage.setItem("kolez.submittedTitle", values.bookTitle);
+        fallbackFormSubmit(details, emailSubject, "#/submit", attachments);
+        return;
+      }
+
+      // No uploads: keep the visitor on the page via the AJAX relay, falling
+      // back to the classic form when the browser relay is unreachable.
+      const forwarded = await forwardToInbox(details, emailSubject);
+      if (!forwarded) {
+        window.sessionStorage.setItem("kolez.submittedTitle", values.bookTitle);
+        fallbackFormSubmit(details, emailSubject, "#/submit");
+        return;
+      }
 
       setSubmittedTitle(values.bookTitle);
       setSubmitState("success");
